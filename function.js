@@ -47,9 +47,9 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   });
   
   //スコア計算
-  CalcScore(score,rank,win,mostloser);
+  CalcScore(Score,rank,win,mostloser);
 
-  return String.Join(",",score);
+  return String.Join(",",Score);
 }
 
 //順位を決定する
@@ -64,12 +64,12 @@ function rank(ten) {
 }
 
 //スコア計算
-function CalcScore(score,rank,win,mostloser) {
+function CalcScore(Score,rank,win,mostloser) {
   var loserScore = 0;
   var winScore = 0;
   var worstScore = 0;
   //1位以外のスコアを合計し、1位のスコアを決定する
-  score.forEach((Ten, idx) => {
+  Score.forEach((Ten, idx) => {
     win.forEach((winP, win_idx) => {
       if(idx != winP){
         loserScore += Ten;
@@ -85,11 +85,11 @@ function CalcScore(score,rank,win,mostloser) {
     //再計算
     worstScore = 0 - (winScore * win.length);
     //最下位のスコアを更新（ここに辿り着く敗者はただ一人）
-    score[mostloser[0]] = worstScore;
+    Score[mostloser[0]] = worstScore;
   }
   
   win.forEach((winP, win_idx) => {
-      score[winP] = winScore;
+      Score[winP] = winScore;
   });
               
 }
