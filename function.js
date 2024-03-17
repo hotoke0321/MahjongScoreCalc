@@ -10,9 +10,7 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   P2Ten = Player2_Tenbo.value ?? 0;
   P3Ten = Player3_Tenbo.value ?? 0;
   P4Ten = Player4_Tenbo.value ?? 0;
-  
-  var result = '';
-  
+
   //点数の配列化
   var PTen = [P1Ten,P2Ten,P3Ten]
   if(PNum == 4){
@@ -51,7 +49,7 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   //スコア計算
   CalcScore(score,rank,win,mostloser)
 
-  return result = String.Join(",",score);
+  return String.Join(",",score);
 
 //順位を決定する
 function rank(ten) {
