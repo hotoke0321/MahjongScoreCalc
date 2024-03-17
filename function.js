@@ -3,6 +3,6 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   if(PlayerNumber == 3){
     return "sannma";
   }else{
-    return PlayerNumber;
+    return String(PlayerNumber);
   }
 }
