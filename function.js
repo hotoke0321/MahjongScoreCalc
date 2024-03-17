@@ -78,11 +78,9 @@ function CalcScore(Score,rank,win,mostloser) {
   var worstScore = 0;
   //1位以外のスコアを合計し、1位のスコアを決定する
   Score.forEach((Ten, idx) => {
-    win.forEach((winP, win_idx) => {
-      if(idx != winP){
-        loserScore += Ten;
-      }
-    })
+    if(!win.includes(idx)){
+      loserScore += Ten;
+    }
   });
   
   winScore = (0 - loserScore) / win.length;
@@ -91,7 +89,13 @@ function CalcScore(Score,rank,win,mostloser) {
     //1位のスコア切上
     winScore = Math.ceil(winScore);
     //再計算
-    worstScore = 0 - (winScore * win.length);
+    var notworstscore = 0;
+    Score.forEach((Ten, idx) => {
+      if(!mostloser.includes(idx)){
+        notworstscore += Ten;
+      }
+    });
+    worstScore = 0 - notworstscore;
     //最下位のスコアを更新（ここに辿り着く敗者はただ一人）
     Score[mostloser[0]] = worstScore;
   }
