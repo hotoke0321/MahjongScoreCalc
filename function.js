@@ -49,7 +49,15 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   //スコア計算
   CalcScore(Score,playerRank,winner,mostloser);
 
-  return String.Join(",",Score);
+  //スコアを文字列としてReturn
+  var result = "";
+  Score.forEach((value, idx) => {
+    if(idx != 0){
+      result += ","
+    }
+    result += String(value)
+  });
+  return result;
 }
 
 //順位を決定する
