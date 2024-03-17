@@ -1,23 +1,63 @@
 [
   {
     "kind": "column",
-    "name": "Substring",
-    "description": "Extracts a substring out of a string. Both start and end indexes are optional. The end index is exclusive.",
-    "author": "Mark Probst <mark@glideapps.com>",
+    "name": "CalcScore",
+    "description": "Yeah!",
+    "author": "SYU",
     "params": [
       {
-        "name": "string",
-        "displayName": "String",
-        "type": "string"
-      },
-      {
-        "name": "start",
-        "displayName": "Start index",
+        "name": "PlayerNumber",
+        "displayName": "PlayerNumber",
         "type": "number"
       },
       {
-        "name": "end",
-        "displayName": "End index",
+        "name": "DefTenbo",
+        "displayName": "DefTenbo",
+        "type": "number"
+      },
+      {
+        "name": "ReturnTenbo",
+        "displayName": "ReturnTenbo",
+        "type": "number"
+      },
+      {
+        "name": "RankPoint1",
+        "displayName": "RankPoint1",
+        "type": "number"
+      },
+      {
+        "name": "RankPoint2",
+        "displayName": "RankPoint2",
+        "type": "number"
+      },
+      {
+        "name": "RankPoint3",
+        "displayName": "RankPoint3",
+        "type": "number"
+      },
+      {
+        "name": "RankPoint4",
+        "displayName": "RankPoint4",
+        "type": "number"
+      },
+      {
+        "name": "Player1_Tenbo",
+        "displayName": "Player1_Tenbo",
+        "type": "number"
+      },
+      {
+        "name": "Player2_Tenbo",
+        "displayName": "Player2_Tenbo",
+        "type": "number"
+      },
+      {
+        "name": "Player3_Tenbo",
+        "displayName": "Player3_Tenbo",
+        "type": "number"
+      },
+      {
+        "name": "Player4_Tenbo",
+        "displayName": "Player4_Tenbo",
         "type": "number"
       }
     ],
