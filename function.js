@@ -47,7 +47,7 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   });
   
   //スコア計算
-  CalcScore(Score,rank,win,mostloser);
+  CalcScore(Score,playerRank,winner,mostloser);
 
   return String.Join(",",Score);
 }
