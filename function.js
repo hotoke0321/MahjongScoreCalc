@@ -12,7 +12,7 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   P4Ten = Player4_Tenbo.value ?? 0;
 
   //点数の配列化
-  var PTen = [P1Ten,P2Ten,P3Ten]
+  var PTen = [P1Ten,P2Ten,P3Ten];
   if(PNum == 4){
     PTen.push(P4Ten);
   }
@@ -58,7 +58,7 @@ function rank(ten) {
   const sorted = ten.slice().sort((a,b) => b - a); 
   // 元配列と並び替えた配列を比較
   const ranked = ten.slice().map((item) => {
-    return sorted.indexOf(item) + 1
+    return sorted.indexOf(item) + 1;
   })
   return ranked;
 }
@@ -74,7 +74,7 @@ function CalcScore(score,rank,win,mostloser) {
       if(idx != winP){
         loserScore += Ten;
       }
-    }
+    })
   });
   
   winScore = (0 - loserScore) / win.length;
@@ -90,6 +90,6 @@ function CalcScore(score,rank,win,mostloser) {
   
   win.forEach((winP, win_idx) => {
       score[winP] = winScore;
-  }
+  });
               
 }
