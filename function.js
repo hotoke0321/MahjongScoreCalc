@@ -16,11 +16,13 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   if(PNum == 3){
     if(P1Ten == P2Ten){
       if(P1Ten == P3Ten){
-        result = '0,0,0'
+        result = '0,0,0';
       }
     }
     //return PNum;
   }else{
-    //return PNum;
+    return '1,1,1';
   }
+
+  return '8,8,8';
 }
