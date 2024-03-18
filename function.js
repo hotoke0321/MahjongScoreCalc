@@ -23,6 +23,12 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
     // 素点から返し点を減算
     Score.push(Math.floor((Ten - RTen)/1000));
   });
+
+  //順位点の配列化
+  var RP = [RP1,RP2,RP3];
+  if(PNum == 4){
+    RP.push(RP4);
+  }
   
   // 順位の配列化
   var playerRank = rank(PTen);
@@ -46,8 +52,14 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
     }
   });
   
-  //スコア計算
+  //素点計算
   CalcScore(Score,playerRank,winner,mostloser);
+
+  //順位点加算
+  CalcRP(Score,RP,playerRank);
+
+  //小数点のスコアがある場合丸め処理を行う
+  RoundScore(Score,playerRank,winner,mostloser);
 
   //スコアを文字列としてReturn
   var result = "";
@@ -59,6 +71,8 @@ window.function = function (PlayerNumber,DefTenbo,ReturnTenbo,RankPoint1,RankPoi
   });
   return result;
 }
+
+/////////////////////////////function///////////////////////////////
 
 //順位を決定する
 function rank(ten) {
@@ -74,34 +88,67 @@ function rank(ten) {
 //スコア計算
 function CalcScore(Score,rank,win,mostloser) {
   var loserScore = 0;
-  var winScore = 0;
-  var worstScore = 0;
+  var winScore = 0;  
   //1位以外のスコアを合計し、1位のスコアを決定する
   Score.forEach((Ten, idx) => {
     if(!win.includes(idx)){
       loserScore += Ten;
     }
   });
-  
   winScore = (0 - loserScore) / win.length;
-  //1位のスコアが小数の場合、再計算
-  if (!Number.isInteger(winScore)) {
-    //1位のスコア切上
-    winScore = Math.ceil(winScore);
-    //再計算
-    var notworstscore = 0;
-    Score.forEach((Ten, idx) => {
-      if(!mostloser.includes(idx)){
-        notworstscore += Ten;
-      }
-    });
-    worstScore = 0 - notworstscore;
-    //最下位のスコアを更新（ここに辿り着く敗者はただ一人）
-    Score[mostloser[0]] = worstScore;
-  }
-  
   win.forEach((winP, win_idx) => {
       Score[winP] = winScore;
+  });       
+}
+
+//順位点を加算しスコアを決定する
+function CalcRP(Score,RP,playerRank){
+  var startidx = 0;
+  //1位から順に加算点を計算
+  for (var x = 1; x <= Score.length; x++) {
+    //同順位がいる場合、順位点を平均する
+    var samerank = playerRank.filter((item) => playerRank == x);
+    if(samerank.length != 0){
+      var rpsum = 0;
+      for (var i = startidx; i < startidx + samerank.length; i++) {
+        rpsum += RP[i];
+      }
+      var rpt = rpsum / samerank.length;
+      RP[x-1] = rpt;
+    }
+    startidx += samerank.length;
+  }
+  //Scoreに加算
+  playerRank.forEach((value, idx) => {
+      Score[idx] += RP[value-1];
   });
-              
+}
+
+function RoundScore(Score,playerRank,winner,mostloser){
+  //小数点スコアがある場合、1位の場合切上、1位以外の場合切下
+  Score.forEach((value, idx) => {
+    if (!Number.isInteger(value)) {
+      if (playerRank[idx] == 1) {
+        Score[idx] = Math.ceil(value);
+      }
+      else {
+        Score[idx] = Math.floor(value);
+      }
+    }
+  });
+  
+  //スコアの合計が0になるように調整
+  const sum = Score.reduce((sum, num) => sum + num, 0);
+  if(sum > 0){
+    //最下位のスコアで調整
+    mostloser.forEach((value, idx) => {
+      Score[value] -= sum / mostloser.length;
+    });
+    
+  }else if(sum < 0){
+    //1位のスコアで調整
+    winner.forEach((value, idx) => {
+      Score[value] -= sum / winner.length;
+    });
+  }
 }
